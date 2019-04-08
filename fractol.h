@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:43 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/08 15:00:15 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/08 17:20:06 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 # define TRUE 1
 # define FALSE 0
 
-# define W 13
-# define A 0
-# define S 1
-# define D 2
+# define K_W 13
+# define K_A 0
+# define K_S 1
+# define K_D 2
 
-# define H 1000
-# define V 1000
+# define H 2000
+# define V 1300
 
 typedef struct	s_complex
 {

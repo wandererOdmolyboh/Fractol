@@ -6,14 +6,11 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:25 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/08 15:36:03 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/08 15:56:30 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
- 
- 
 
 
 static int	closer(void *param)
