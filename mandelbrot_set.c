@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot_set.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 14:53:51 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/04/11 22:19:35 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:34:00 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 	// c->i = i / p->zoom - (FR_HE
 
-static int value (t_fractol *fractol, /*double m_y, double m_x,*/ double x, double y)
+static int value (t_fractol *fractol,  double x, double y)
 {
     unsigned int	nb_iter;
 	t_complex		complex1;
@@ -26,18 +26,19 @@ static int value (t_fractol *fractol, /*double m_y, double m_x,*/ double x, doub
 	nb_iter = 0;
 
 	// FOR MANDELBROD
-	complex1.x = (x / 500.) - (V / 2. / 500.) - 1.;
-	complex1.i = (y / 500.) - (H / 2. / 500.) + 0.7;
+	complex1.x = (x / 300.) - (W / 2. / 300.) - 0.4;
+	complex1.i = (y / 300.) - (H / 2. / 300.);
 
-	complex2.x = 0;//m_x / 100;
-	complex2.i = 0;// m_y / 100;
-	while (absc(complex2) < 4 && nb_iter <= 34)
+	complex2.x = (fractol->mouse_x) / 1000.;//m_x / 100;
+	complex2.i = (fractol->mouse_y) / 1000.;// m_y / 100;
+	while (absc(complex2) < 16 && nb_iter <= 34)
 	{
         complex2 = add(sqr(complex2), complex1);
         nb_iter++;
     }
 	if (nb_iter < 34)
-		return (((fractol->c_rgb.red * nb_iter / 33) << 16) | 
+		return ( ((fractol->c_rgb.alpha) << 24) |
+			((fractol->c_rgb.red * nb_iter / 33) << 16) | 
 			((fractol->c_rgb.green * nb_iter / 33)<< 8) |
 			((fractol->c_rgb.blue * nb_iter) / 33));
     else
@@ -48,16 +49,19 @@ void mandelbrot_set(/*double m_y, double m_x,*/ t_fractol *fractol)
 {
 	int	x;
 	int y;
-	
-	x = -1;
+	int colooor;
+
 	y = -1;
-	fractol->c_rgb.color = color_fr(fractol);
-	while (++y < V)
+	while (++y < W)
 	{
 		x = -1;
 		while(++x < H)
-		{ 
-			mlx_pixel_put(fractol->mlx_ptr, fractol->win_ptr, x, y, value(fractol, x, y));
+		{
+			colooor = value(fractol, x, y);
+			// ft_memcpy(fractol->image_ptr + y + x * V, &colooor, sizeof(int));
+			 *(fractol->image_ptr + x + y * W) = colooor;
 		}
 	}
+	printf("%d %d\n", fractol->mouse_x, fractol->mouse_y);
+	mlx_put_image_to_window(fractol->mlx_ptr, fractol->win_ptr, fractol->image, 0, 0);
 }

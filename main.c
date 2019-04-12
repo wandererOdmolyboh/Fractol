@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:25 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/11 21:45:49 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:42:39 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,39 @@ static int	closer(void *param)
 	return (0);
 }
 
+static int mouse_move(int x, int y, t_fractol *fractol)
+{
+	int arr[2];
+	if (x > 0 && x < W && y > 0 && y < H)
+	{
+		arr[0] = x;
+		arr[1] = y;
+		(fractol->mouse_x) = x;
+		(fractol->mouse_y) = y;
+		mandelbrot_set(fractol);
+	}
+	return (0);
+}
+
+void manager(t_fractol *fractol)
+{
+	int arr;
+
+	mlx_hook(fractol->win_ptr, 6, 1L < 6, mouse_move, fractol);
+	mlx_hook(fractol->win_ptr, 2, 1L << 1, &manegment_control, fractol);
+	mlx_hook(fractol->win_ptr, 17, 0, closer, fractol);
+	mlx_loop(fractol->mlx_ptr);
+}
+
 void		window(t_fractol *fractol)
 {
 	fractol->mlx_ptr = mlx_init();
-	fractol->win_ptr = mlx_new_window(fractol->mlx_ptr, H, V, "__FRACTOL_42__");
+	fractol->win_ptr = mlx_new_window(fractol->mlx_ptr, H, W, "__FRACTOL_42__");
+	
+	fractol->image = mlx_new_image(fractol->mlx_ptr, W, H);
+	fractol->image_ptr = (int *)mlx_get_data_addr(fractol->image, &(fractol->bits_per_pixel),  &(fractol->size_line),  &(fractol->endian));
 	mandelbrot_set(fractol);
-	mlx_hook(fractol->win_ptr, 17, 0, closer, fractol);
-	mlx_loop(fractol->mlx_ptr);
+	manager(fractol);
 }
 
 
