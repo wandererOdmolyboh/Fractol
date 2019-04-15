@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manegment.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:56:43 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/04/12 13:31:06 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/13 21:13:06 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int			manegment_control(int keycode, t_fractol *fractol)
 
         color_fr(fractol);
 		mandelbrot_set(fractol);
+    }
+    else if (keycode == K_PLUS)
+    {
+        change_zoom(fractol);
+        mandelbrot_set(fractol);
     }
     else if (keycode == K_ESC)
     {

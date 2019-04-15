@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:43 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/12 14:16:10 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:01:55 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,19 @@
 
 # define TRUE 1
 # define FALSE 0
+# define ZOOM 3
+
+/*
+**define_keycode
+*/
 
 # define K_W 13
 # define K_A 0
 # define K_S 1
 # define K_D 2
-# define K_SHIFT 257
+# define K_SHIFT 65505//257
 # define K_ESC 53
+# define K_PLUS 65451
 
 /*
 **Resoluton
@@ -85,6 +91,7 @@ typedef struct	s_fractol
 	int			endian;
 	int			mouse_x;
 	int			mouse_y;
+	double		zoom;
 }				t_fractol;
 
 enum			colorset
@@ -93,6 +100,10 @@ enum			colorset
 	green = 1671,
 	blue = 50000,
 	rainbow = 34566
+		//16448000
+	//9287168
+	//1356820
+	//-1286
 };
 
 /*
@@ -113,5 +124,8 @@ void			mandelbrot_set(t_fractol *fractol);
 int				manegment_control(int keycode, t_fractol *fractol);
 void			color_fr(t_fractol *fractol);
 void			init_color(t_fractol *fractol);
-
+void change_zoom(t_fractol *fractol);
+t_complex mapPoint(double radius,int x,int y);
+void juliaSet(t_fractol *fractal, t_complex c, double radius, int n);
+void tester_set(t_fractol *fractal);
 #endif

@@ -6,7 +6,7 @@
 /*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 08:56:12 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/11 21:36:27 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:32:09 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ int main()
     else if (i == 4)
         colorr = green;
     else if (i == 0)
-        colorr = green;
-    
-   colorr = red;
-   printf("%d \n", colorr);
-   colorr++;
-   printf("%d \n", colorr);
-//    for (i=rainbow; i<=red; i++)       
-//       printf("%d ", i); 
-        
+        colorr = green;       
    return 0; 
 }

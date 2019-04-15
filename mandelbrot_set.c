@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot_set.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 14:53:51 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/04/12 13:34:00 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:50:57 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 
 	// c->i = i / p->zoom - (FR_HE
 
+void change_zoom(t_fractol *fractol)
+{
+	fractol->zoom *= ZOOM;
+}
+
 static int value (t_fractol *fractol,  double x, double y)
 {
     unsigned int	nb_iter;
@@ -26,21 +31,25 @@ static int value (t_fractol *fractol,  double x, double y)
 	nb_iter = 0;
 
 	// FOR MANDELBROD
-	complex1.x = (x / 300.) - (W / 2. / 300.) - 0.4;
-	complex1.i = (y / 300.) - (H / 2. / 300.);
+	complex1.x = (x / (300. + fractol->zoom)) - (W / 2. / (300. + fractol->zoom)) - 0.4;
+	complex1.i = (y / (300. + fractol->zoom)) - (H / 2. / (300. + fractol->zoom));
 
 	complex2.x = (fractol->mouse_x) / 1000.;//m_x / 100;
 	complex2.i = (fractol->mouse_y) / 1000.;// m_y / 100;
+
 	while (absc(complex2) < 16 && nb_iter <= 34)
 	{
         complex2 = add(sqr(complex2), complex1);
+		if(absc(complex2)>10000000) // maybe or not
+			return (55);
+		
         nb_iter++;
     }
 	if (nb_iter < 34)
 		return ( ((fractol->c_rgb.alpha) << 24) |
 			((fractol->c_rgb.red * nb_iter / 33) << 16) | 
 			((fractol->c_rgb.green * nb_iter / 33)<< 8) |
-			((fractol->c_rgb.blue * nb_iter) / 33));
+			(fractol->c_rgb.blue * nb_iter/ 33));
     else
 		return (0);
 }

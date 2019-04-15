@@ -6,7 +6,7 @@
 /*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 16:20:23 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/11 16:21:03 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/13 23:02:50 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_complex	sqr(t_complex a)
 	
 	c.x = a.x * a.x - a.i * a.i;
 	c.i = 2 * a.x * a.i;
+
 	return (c);
 }
 

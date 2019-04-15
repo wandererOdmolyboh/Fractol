@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 21:35:37 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/12 13:32:31 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/15 10:58:05 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void init_color(t_fractol *fractol)
 {
+    fractol->zoom = 1;
     fractol->mouse_x = 0;
     fractol->mouse_y = 0;
     fractol->c_rgb.red = 255;
     fractol->c_rgb.blue = 0;
     fractol->c_rgb.green = 0;
-    fractol->c_rgb.alpha = 50;
+    fractol->c_rgb.alpha = 0;
     fractol->c_rgb.color = (
-        (fractol->c_rgb.red << 24) |
+        (fractol->c_rgb.alpha << 24) |
         (fractol->c_rgb.red << 16) |
     (fractol->c_rgb.green << 8) | (fractol->c_rgb.blue));
 }
