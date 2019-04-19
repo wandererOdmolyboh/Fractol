@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:25 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/15 20:02:16 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:19:27 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,20 @@ static int	closer(void *param)
 
 static int mouse_move(int x, int y, t_fractol *fractol)
 {
+	//t_complex c;
 	if (x > 0 && x < W && y > 0 && y < H)
 	{
-		(fractol->mouse_x) = x;
-		(fractol->mouse_y) = y;
-		mandelbrot_set(fractol);
+		(fractol->mouse_x) = (x - H/2) / 600.;
+		(fractol->mouse_y) = (-y + H/2 ) / 600.;
+		printf("x == %f  y == %f\n",fractol->mouse_x, fractol->mouse_y);
+			
+	//	c.x = (fractol->mouse_x) / 20;
+	//	c.i = (fractol->mouse_x) / 20;
+		// -0.8 and 0.156.
+	//	juliaSet(fractol, c, 10, 10);
+		mandelbrot_set(/*double m_y, double m_x,*/ fractol);
+//tester_set(fractol);
+
 	}
 	return (0);
 }
@@ -41,20 +50,21 @@ void manager(t_fractol *fractol)
 
 void		window(t_fractol *fractol)
 {
-	// t_complex c;
- 
+	t_complex c;
 	
-	// c.x = -0.8;
-	// c.i = 0.156;
+	c.x = -0.8;
+	c.i = 0.156;
 	fractol->mlx_ptr = mlx_init();
 	fractol->win_ptr = mlx_new_window(fractol->mlx_ptr, H, W, "__FRACTOL_42__");
 	
 	fractol->image = mlx_new_image(fractol->mlx_ptr, W, H);
 	fractol->image_ptr = (int *)mlx_get_data_addr(fractol->image, &(fractol->bits_per_pixel),  &(fractol->size_line),  &(fractol->endian));
-// -0.8 and 0.156.
-	//juliaSet(fractol, c, 5, 4);
-	tester_set(fractol);
-	//mandelbrot_set(fractol);
+	// -0.8 and 0.156.
+	//juliaSet(fractol, c, 10, 10);
+	//tester_set(fractol);
+	fractol->ff = &mandelbor_v;
+	//tester_set(fractol);
+	mandelbrot_set(fractol);
 	manager(fractol);
 }
 
@@ -70,23 +80,25 @@ int check(char *string)
 	else
 	{
 		ft_putstr(string);
-		ft_putstr(" not found name ");
+		ft_putstr(" not found name\n");
 	}
 	return (FALSE);
 }
 
 int main(int argc, char **argv)
 {
-	t_fractol *fractol;
+	t_fractol fractol;
 
-	if (argc >= 2.0 && argc < 5 && check(argv[1]))
+	if (argc >= 2.0 && argc < 4 && check(argv[1]))
 	{
-		if ((fractol = (t_fractol *)malloc(sizeof(t_fractol))) == NULL)
-			return (0);
-		init_color(fractol);
-		window(fractol);
+		init_color(&fractol);
+		window(&fractol);
 	}
-	else 
-		ft_putstr("Error\n");
+	else if (argc == 1 || argc > 3)
+	{
+		ft_putstr("usage: ");
+		ft_putstr(argv[0]);
+		ft_putstr(" Juliaset | Mandelbrot | another or 2 combination\n");
+	}
 	return (0);
 }

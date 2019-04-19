@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:47:16 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/15 21:01:14 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/19 11:43:35 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void tester_set(t_fractol *fractal)
     double x;
     double y;
     double t;
-    double n = W / 4;
+    double n = (W - 10) / 4;
     double r1;
     double r2;
 
-    r1 = -0.9;//(4.0*) - 2.0;
-    r2 = 0;//(2.0*) - 1.0;
-    for (B = 0; B <= W; B++)
+    r1 = (fractal->mouse_x) / 1000.;//(4.0*) - 2.0;
+    r2 = (fractal->mouse_x) / 1000.;//(2.0*) - 1.0;
+    for (B = 0; B <= (W - 10); B++)
     {
         b = 2 - (B / n);
-        for (A = 0; A <= W; A++)
+        for (A = 0; A <= (W - 10); A++)
         {
             a = -2 + (A / n);
             x = a;

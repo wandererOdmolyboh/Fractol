@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 21:35:37 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/15 10:58:05 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:42:50 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void init_color(t_fractol *fractol)
 
 void    color_fr(t_fractol *fractol)
 {
-    enum colorset colorr;
+    enum e_colorset colorr;
     static int i;
 
     i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JuliaSet.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 22:15:51 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/13 22:34:53 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/19 10:47:05 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_complex mapPoint(double radius,int x,int y)
 {
 	t_complex c;
  
-	c.x = 2*radius*(x - 1000/2.0)/1000;
-	c.i = 2*radius*(y - 1000/2.0)/1000;
+	c.x = 2*radius*(x - W/2.0)/W;
+	c.i = 2*radius*(y - W/2.0)/W;
  
 	return c;
 }
@@ -27,8 +27,8 @@ void juliaSet(t_fractol *fractal, t_complex c, double radius, int n)
 	int x,y,i;
 	t_complex z0,z1;
  
-	for(x=0;x<=1000;x++)
-		for(y=0;y<=1000;y++)
+	for(x=100;x < W - 100;x++)
+		for(y=100;y < W - 100;y++)
         {
 			z0 = mapPoint(radius,x,y);
 			for(i=1;i<=n;i++){

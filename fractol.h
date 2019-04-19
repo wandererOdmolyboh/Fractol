@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:43 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/15 20:01:55 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:48:31 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define K_A 0
 # define K_S 1
 # define K_D 2
-# define K_SHIFT 65505//257
+# define K_SHIFT /*65505*/257
 # define K_ESC 53
 # define K_PLUS 65451
 
@@ -49,36 +49,42 @@
 **Resoluton
 */
 
-# define H 1000
-# define W 1000
+# define H 1200
+# define W 1200
 
 /*
 **blocks_stuct
 */
 
-typedef struct	s_complex
+typedef struct s_complex	t_complex;
+typedef struct s_rgb		t_rgb;
+typedef struct s_typefr		t_typefr;
+typedef struct s_fractol	t_fractol;
+typedef int	(*t_of_fra)		(t_fractol*, double, double);
+
+struct	s_complex
 {
 	double		x;
 	double		i;
-}				t_complex;
+};
 
-typedef struct	s_rgb
+struct	s_rgb
 {
 	int			color;
 	int			red;
 	int			blue;
 	int			green;
 	int			alpha;
-}				t_rgb;
+};
 
-typedef struct	s_typefr
+struct	s_typefr
 {
 	char		*s;
 	void		*fractal;
 	int			rank;
-}				t_typefr;
+};
 
-typedef struct	s_fractol
+struct	s_fractol
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -89,22 +95,26 @@ typedef struct	s_fractol
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
-	int			mouse_x;
-	int			mouse_y;
+	double		mouse_x;
+	double		mouse_y;
 	double		zoom;
-}				t_fractol;
+	t_of_fra	ff;
+	int			rank;
+	char		*name;
+};
 
-enum			colorset
+enum			e_colorset
 {
 	red = 16777215,
 	green = 1671,
 	blue = 50000,
-	rainbow = 34566
+	rainbow = 9287168
+};
+
 		//16448000
 	//9287168
 	//1356820
 	//-1286
-};
 
 /*
 **return ((1671 * nb_iter)/33);
@@ -128,4 +138,6 @@ void change_zoom(t_fractol *fractol);
 t_complex mapPoint(double radius,int x,int y);
 void juliaSet(t_fractol *fractal, t_complex c, double radius, int n);
 void tester_set(t_fractol *fractal);
+int mandelbor_v(t_fractol *fractol,  double x, double y);
+int julias_v(t_fractol *fractol,  double x, double y);
 #endif
