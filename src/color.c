@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 21:35:37 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/19 15:42:50 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:01:10 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractal.h"
 
-void init_color(t_fractol *fractol)
+void init_value(t_fractol *fractol)
 {
     fractol->zoom = 1;
     fractol->mouse_x = 0;
@@ -44,7 +44,7 @@ void    color_fr(t_fractol *fractol)
     else if (i == 3)
         colorr = rainbow;
     else if (i == 4)
-        colorr = green;
+        colorr = another;
     else
          colorr = red;
     fractol->c_rgb.color = colorr;

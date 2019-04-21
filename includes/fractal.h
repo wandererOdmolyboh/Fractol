@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractal.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:43 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/19 15:48:31 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:15:38 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTAL_H
+# define FRACTAL_H
 
 /*
-**Libs_bloks
+**			Libs_bloks
 */
 
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
+# include "../libft/libft.h"
 # include <mlx.h>
 # include <math.h>
+# include <stdlib.h>
 
 /*
-**define_value_bloks
+**				define_value_bloks
 */
 
 # define TRUE 1
@@ -34,26 +31,34 @@
 # define ZOOM 3
 
 /*
-**define_keycode
+**				define_keycode
 */
 
-# define K_W 13
+# define K_W 119//13
 # define K_A 0
-# define K_S 1
+# define K_S 115
 # define K_D 2
-# define K_SHIFT /*65505*/257
-# define K_ESC 53
+# define K_SHIFT 65505/*257*/
+# define K_ESC 65307//53
 # define K_PLUS 65451
 
 /*
-**Resoluton
+**			Resoluton
 */
 
-# define H 1200
-# define W 1200
+# define SQ_M 1200/// rename RESOLUT
 
 /*
-**blocks_stuct
+**DEFINE_MGIC_NUMBER
+*/
+
+# define KE_M 600.0
+# define SHIFT 300.0
+# define SHIFT_L 4.0
+# define KE 2.0
+
+/*
+**				blocks_stuct
 */
 
 typedef struct s_complex	t_complex;
@@ -80,8 +85,9 @@ struct	s_rgb
 struct	s_typefr
 {
 	char		*s;
-	void		*fractal;
+	t_of_fra	fractal;
 	int			rank;
+	int			max_iter;
 };
 
 struct	s_fractol
@@ -98,18 +104,24 @@ struct	s_fractol
 	double		mouse_x;
 	double		mouse_y;
 	double		zoom;
-	t_of_fra	ff;
+	t_typefr	ff;
 	int			rank;
 	char		*name;
 };
 
 enum			e_colorset
 {
-	red = 16777215,
+	red = 16711680,
 	green = 1671,
 	blue = 50000,
-	rainbow = 9287168
+	rainbow = 9287168,
+	another = 34566
 };
+	// red = 16711680,
+	// green = 1671,
+	// blue = 50000,
+	// rainbow = 9287168,
+	// another = 34566
 
 		//16448000
 	//9287168
@@ -123,21 +135,36 @@ enum			e_colorset
 **		// return (16777215);
 **colorset Error (line 90, col 0): colorset is not well prefixed.
 */
+
 /*
-**function_bloks
+**					function_bloks
 */
 
+/*
+** Complex number
+*/
 double			absc(t_complex a);
 t_complex		add(t_complex a, t_complex b);
 t_complex		sqr(t_complex a);
-void			mandelbrot_set(t_fractol *fractol);
-int				manegment_control(int keycode, t_fractol *fractol);
+double absc2(t_complex a, t_complex b);
+
+/*
+** Other funcs
+*/
+
+void			putter_pixel(t_fractol *fractol);
 void			color_fr(t_fractol *fractol);
-void			init_color(t_fractol *fractol);
-void change_zoom(t_fractol *fractol);
-t_complex mapPoint(double radius,int x,int y);
-void juliaSet(t_fractol *fractal, t_complex c, double radius, int n);
-void tester_set(t_fractol *fractal);
-int mandelbor_v(t_fractol *fractol,  double x, double y);
-int julias_v(t_fractol *fractol,  double x, double y);
+void			init_value(t_fractol *fractol);
+int				manegment_control(int keycode, t_fractol *fractol);
+t_complex		mapPoint(double radius,int x,int y);
+void			juliaSet(t_fractol *fractal, t_complex c, double radius, int n);
+void			tester_set(t_fractol *fractal);
+
+/*
+** Fractals_value_set
+*/
+int				burning_ship_v(t_fractol *fractol, double x, double y);
+int				mandelbor_v(t_fractol *fractol,  double x, double y);
+int				julias_v(t_fractol *fractol,  double x, double y);
+
 #endif

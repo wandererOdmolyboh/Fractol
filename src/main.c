@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:25 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/19 16:19:27 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:33:48 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractal.h"
 
 
 static int	closer(void *param)
@@ -22,20 +22,11 @@ static int	closer(void *param)
 
 static int mouse_move(int x, int y, t_fractol *fractol)
 {
-	//t_complex c;
-	if (x > 0 && x < W && y > 0 && y < H)
+	if (x > 0 && x < SQ_M && y > 0 && y < SQ_M)
 	{
-		(fractol->mouse_x) = (x - H/2) / 600.;
-		(fractol->mouse_y) = (-y + H/2 ) / 600.;
-		printf("x == %f  y == %f\n",fractol->mouse_x, fractol->mouse_y);
-			
-	//	c.x = (fractol->mouse_x) / 20;
-	//	c.i = (fractol->mouse_x) / 20;
-		// -0.8 and 0.156.
-	//	juliaSet(fractol, c, 10, 10);
-		mandelbrot_set(/*double m_y, double m_x,*/ fractol);
-//tester_set(fractol);
-
+		(fractol->mouse_x) = (x - SQ_M/2) / KE_M;
+		(fractol->mouse_y) = (-y + SQ_M/2 ) / KE_M;
+		putter_pixel(fractol);
 	}
 	return (0);
 }
@@ -55,16 +46,12 @@ void		window(t_fractol *fractol)
 	c.x = -0.8;
 	c.i = 0.156;
 	fractol->mlx_ptr = mlx_init();
-	fractol->win_ptr = mlx_new_window(fractol->mlx_ptr, H, W, "__FRACTOL_42__");
-	
-	fractol->image = mlx_new_image(fractol->mlx_ptr, W, H);
+	fractol->win_ptr = mlx_new_window(fractol->mlx_ptr, SQ_M, SQ_M, "__FRACTOL_42__");
+	fractol->image = mlx_new_image(fractol->mlx_ptr, SQ_M, SQ_M);
 	fractol->image_ptr = (int *)mlx_get_data_addr(fractol->image, &(fractol->bits_per_pixel),  &(fractol->size_line),  &(fractol->endian));
-	// -0.8 and 0.156.
-	//juliaSet(fractol, c, 10, 10);
-	//tester_set(fractol);
-	fractol->ff = &mandelbor_v;
-	//tester_set(fractol);
-	mandelbrot_set(fractol);
+	fractol->ff.fractal = &burning_ship_v;
+	//netwon(fractol);
+	putter_pixel(fractol);
 	manager(fractol);
 }
 
@@ -87,12 +74,13 @@ int check(char *string)
 
 int main(int argc, char **argv)
 {
-	t_fractol fractol;
+	t_fractol fractal;
 
 	if (argc >= 2.0 && argc < 4 && check(argv[1]))
 	{
-		init_color(&fractol);
-		window(&fractol);
+		fractal.name = argv[1];
+		init_value(&fractal);
+		window(&fractal);
 	}
 	else if (argc == 1 || argc > 3)
 	{
