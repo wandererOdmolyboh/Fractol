@@ -6,7 +6,7 @@
 /*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 19:30:10 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/21 16:29:34 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/22 14:57:10 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@ int burning_ship_v(t_fractol *fractol, double x, double y)
 	t_complex		c;
 
 	nb_iter = 0;
-	z.x = (x / (300. + fractol->zoom)) - (SQ_M / 2. / (300. + fractol->zoom)) - 0.4;
-	z.i = (y / (300. + fractol->zoom)) - (SQ_M / 2. / (300. + fractol->zoom));
+	z.x = (x / (300. + fractol->zoom)) - (RES / 2. / (300. + fractol->zoom)) - 0.4;
+	z.i = (y / (300. + fractol->zoom)) - (RES / 2. / (300. + fractol->zoom));
 	c.x = (fractol->mouse_x);
-	c.i = (fractol->mouse_y);// try to mac work with difine number
+	c.i = (fractol->mouse_y);
+/*
+**try to mac work with difine number
+*/
 	while (absc(c) < 16 && nb_iter <= 34)
 	{
 		c.x = c.x > 0 ? c.x : -c.x;
-        c.i = c.i > 0 ? c.i : -c.i; 
+        c.i = c.i > 0 ? c.i : -c.i;
         c = add(sqr(c), z);
 		nb_iter++;
     }
-	if(nb_iter >= 12 && nb_iter <= 33)//20
+	if(nb_iter >= 12 && nb_iter <= 33)
 	{
 		nb_iter =  ((255 * nb_iter / 33) << 16) |
 		((185 * nb_iter / 33)<< 8) |
@@ -40,7 +43,7 @@ int burning_ship_v(t_fractol *fractol, double x, double y)
 	if (nb_iter < 33)
 	{
 			nb_iter = ( ((fractol->c_rgb.alpha) << 24) |
-			((fractol->c_rgb.red * nb_iter / 33) << 16) | 
+			((fractol->c_rgb.red * nb_iter / 33) << 16) |
 			((fractol->c_rgb.green * nb_iter / 33)<< 8) |
 			(fractol->c_rgb.blue * nb_iter/ 33));
 			return(nb_iter);

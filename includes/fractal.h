@@ -6,7 +6,7 @@
 /*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 17:04:43 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/21 15:15:38 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/22 14:40:22 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 **			Resoluton
 */
 
-# define SQ_M 1200/// rename RESOLUT
+# define RES 1200/// rename RESOLUT
 
 /*
 **DEFINE_MGIC_NUMBER

@@ -6,7 +6,7 @@
 /*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 16:20:23 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/21 14:55:45 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/22 14:58:59 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_complex	add(t_complex a, t_complex b)
 {
 	t_complex	c;
-	
+
 	c.x = a.x + b.x;
 	c.i = a.i + b.i;
 	return (c);

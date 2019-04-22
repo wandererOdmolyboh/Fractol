@@ -6,7 +6,7 @@
 /*   By: wanderer <wanderer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 21:35:37 by wanderer          #+#    #+#             */
-/*   Updated: 2019/04/21 15:01:10 by wanderer         ###   ########.fr       */
+/*   Updated: 2019/04/22 14:59:48 by wanderer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    color_fr(t_fractol *fractol)
     if (i == 0)
         colorr = green;
     else if (i == 1)
-        colorr = red; 
+        colorr = red;
     else if (i == 2)
         colorr = blue;
     else if (i == 3)
