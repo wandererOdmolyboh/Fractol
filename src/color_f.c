@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_set.c                                        :+:      :+:    :+:   */
+/*   color_f.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 14:53:51 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/04/23 09:18:11 by dmolyboh         ###   ########.fr       */
+/*   Created: 2019/04/23 13:41:27 by dmolyboh          #+#    #+#             */
+/*   Updated: 2019/04/23 14:18:52 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractal.h"
 
-void	putter_pixel(t_fractol *fractal)
+int		color_f(t_fractol *fractal, int colorr, int nb_iter)
 {
-	int	x;
-	int	y;
-	int	color_set;
+	int color_rez;
 
-	y = -1;
-	while (++y < RES)
+	if (fractal != NULL)
 	{
-		x = -1;
-		while (++x < RES)
-		{
-			color_set = (fractal->ff.fractal)(fractal, x, y);
-			*(fractal->image_ptr + x + y * RES) = color_set;
-		}
+		color_rez = (((fractal->c_rgb.alpha) << 24) |
+		((fractal->c_rgb.red * nb_iter / 33) << 16) |
+		((fractal->c_rgb.green * nb_iter / 33) << 8) |
+		(fractal->c_rgb.blue * nb_iter / 33));
 	}
-	mlx_put_image_to_window(fractal->mlx_ptr, fractal->win_ptr,
-	fractal->image, 0, 0);
+	else
+	{
+		color_rez = colorr;
+	}
+	return (color_rez);
 }
